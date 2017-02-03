@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+  <head>
+    <!-- Compressed CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.0/css/foundation.min.css">
+
+<!-- Compressed JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.0/js/foundation.min.js"></script>
+</head>
+    <title>login_app</title>
+  </head>
+  <body>
+    {%if 'login' not in request.session%}
+      <div class="top-bar">
+      <div class="top-bar-left">
+        <ul class="menu">
+         <li class="menu-text">Quotes</li>
+       
+      </ul>
+      </div>
+    </div>
+    {%else%}
+        <div class="top-bar">
+      <div class="top-bar-left">
+        <ul class="menu">
+         <li class="menu-text">Quotes</li>
+           <li class="menu-text">
+        <!--    <a href="/quotes">Dashboard</a></li> -->
+      <!--   <li><a href="#">Item One</a></li>
+        <li><a href="#">Item Two</a></li>
+        <li><a href="#">Item Three</a></li> -->
+    </ul>
+      </div>
+      <div class="top-bar-right">
+        Welcome {{request.session.first_name}}: 
+        <a href="/quotes">Dashboard</a> | 
+        <a href="/logout">Logout</a>
+      </div>
+    </div>
+    {%endif%}
+     {% if messages %}
+             {% for message in messages %}
+             <div class="callout {{message.tags}}">
+               <p>  {{message}} </p>
+              </div>
+             {%endfor%}
+             </ul>
+          </div>
+        {%endif%}
+    <div id="content">
+    {% block content %}
+       
+    {% endblock %}</div>
+  </body>
+</html>

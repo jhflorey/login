@@ -1,0 +1,38 @@
+{% extends "login_app/base.html" %}
+{% block content %}
+	<div class="container">
+	 	<div class="row">
+			<div class="small-12 columns">
+				<h1> Welcome, please login or register!</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="small-12 medium-6 columns">
+				<h2>Existing Users Login<h2>
+				<form action="/login" method="POST">
+				{%csrf_token%}
+					<input type="email" name="email" placeholder="Email Address" required>
+					<input type="password" name="password" placeholder="Password" required>
+					<button type="submit" class="button medium float-right">Login</button>
+				</form>
+			</div>
+			<div class="small-12 medium-6 columns">
+				<h2> New Here? Sign up!</h2>
+				<form action="/register" method="POST">
+				{%csrf_token%}
+					<input type="text" name="first_name" value="Jessica" placeholder="First Name" required>
+					<input type="text" name="last_name" value="Florey" placeholder="Last Name" required>
+					<input type="email" name="email" value="jessica@gmail.com" placeholder="Email Address" required>
+					<input type="password" name="password" value="happy2017" placeholder="Password" required>
+					<input type="password" name="password2"  value="happy2017" placeholder="Confirm Password" required>
+					<label>Date of Birth</label>
+					<input type="date" name="date_of_birth" required>
+					<button type="submit" class="button medium success float-right">Register</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	{% endblock %}
+</body>
+</html>
+

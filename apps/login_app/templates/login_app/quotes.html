@@ -1,0 +1,54 @@
+{% extends "login_app/base.html" %}
+{% block content %}
+<style>
+	.scroller {
+		height:500px;
+		overflow: auto;
+	}
+</style>
+<div class="container">
+ 	<div class="row">
+		<div class="small-12 columns">
+			<h1> Welcome {{request.session.first_name}}:  These are your amazing quotes</h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="small-12 medium-6 columns scroller">
+			<h3>Quoteable Quotes</h3>
+			{%for quote in quotes%}
+			 <div class="callout">
+				{{quote.quoted_by}}:{{quote.message}}
+				<a class="button primary small float-right" href="favorite/add/{{quote.id}}">Add to My List</a>
+				<p>Posted by: <a href="/user/{{quote.submitted_by.id}}">{{quote.submit_by.first_name}}</a></p>
+			</div>
+			{%endfor%}
+		</div>
+		<div class="small-12 medium-6 columns scroller">
+			<h3>Your Favorites</h3>
+			{%for favorite in favorites%}
+				<div class="callout">
+					{{favorite.quote_id.quoted_by}}:{{favorite.quote_id.message}}
+					<a  href="favorite/destroy/{{favorite.id}}" class="button primary small float-right">Remove From Favorites</a>
+					<p>Posted by: <a href="/user/{{favorite.quote_id.submitted_by.id}}">{{favorite.quote_id.submit_by.first_name}}</a></p>
+				</div>
+			{%endfor%}
+		</div>
+	</div>
+	<div class="row">
+		<div class="small-12 medium-6 columns">
+		</div>
+		<div class="small-12 medium-6 columns">
+			<h3>Contribute a Quote</h3>
+			<form action="/quote/create" method="POST">
+			{%csrf_token%}
+				<input type="text" name="quoted_by" placeholder="Quote Author">
+				<label>Quote Text</label>
+				<textarea name="quote_message"></textarea>
+				<button type="submit" class="button medium success float-right">Submit</button>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,28 @@
+{% extends "login_app/base.html" %}
+{% block content %}
+<style>
+	.red {
+		color: red;
+		font-weight: 900;
+	}
+</style>
+	<div class="container">
+		<div class="row">
+			<div class="small-12 columns">
+				<h2>Posts by {{user.first_name}}</h2>
+				<h2>Count:{{count}}</h2>
+			</div>
+		</div>
+		<div class="row">
+			<div class="small-12 columns">
+				 {%for post in posts%}
+				<p>
+							<span class="red">{{post.quoted_by}}</span>	{{post.message}}
+				<p>
+			{%endfor%}
+			</div>
+		</div>
+	</div>
+	{% endblock %}
+</body>
+</html>
